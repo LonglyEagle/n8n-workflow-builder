@@ -98,7 +98,7 @@ export async function deleteWorkflow(id: string): Promise<any> {
 export async function activateWorkflow(id: string): Promise<N8NWorkflowResponse> {
   try {
     console.log(`Activating workflow with ID: ${id}`);
-    const response = await api.patch(`/workflows/${id}/activate`, {});
+    const response = await api.post(`/workflows/${id}/activate`, {});
     console.log('Response:', response.status, response.statusText);
     return response.data;
   } catch (error) {
@@ -109,7 +109,7 @@ export async function activateWorkflow(id: string): Promise<N8NWorkflowResponse>
 export async function deactivateWorkflow(id: string): Promise<N8NWorkflowResponse> {
   try {
     console.log(`Deactivating workflow with ID: ${id}`);
-    const response = await api.patch(`/workflows/${id}/deactivate`, {});
+    const response = await api.post(`/workflows/${id}/deactivate`, {});
     console.log('Response:', response.status, response.statusText);
     return response.data;
   } catch (error) {
