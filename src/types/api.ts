@@ -1,15 +1,15 @@
 import { ExecutionData, ExecutionMode } from './execution';
-import { N8NNode } from './workflow';
+import { N8NNodeResponse, WorkflowSettings } from './workflow';
 
 export interface N8NWorkflowResponse {
   id: string;
   name: string;
   active: boolean;
-  nodes: N8NNode[];
-  connections: any;
   createdAt: string;
   updatedAt: string;
-  settings?: Record<string, any>;
+  nodes: N8NNodeResponse[];
+  connections?: Record<string, Array<{ node: string; type: string; index: number }>>;
+  settings?: WorkflowSettings;
   staticData?: Record<string, any> | string | null;
   tags?: { id: string; name: string; createdAt: string; updatedAt: string; }[];
 }

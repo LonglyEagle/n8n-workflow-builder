@@ -1,2 +1,1 @@
-// export { WorkflowNode } from './workflow'; // Old export removed
-export { N8NNode } from './workflow';
+export { N8NNodeInput, N8NNodeResponse } from './workflow';

@@ -6,7 +6,28 @@
 //   position?: { x: number; y: number };
 // }
 
-export interface N8NNode {
+// export interface N8NNode { // Removing this old N8NNode interface
+//   id?: string;
+//   name: string;
+//   type: string;
+//   typeVersion: number;
+//   parameters: Record<string, any>;
+//   position?: number[];
+//   webhookId?: string;
+//   disabled?: boolean;
+//   notesInFlow?: boolean;
+//   notes?: string;
+//   executeOnce?: boolean;
+//   alwaysOutputData?: boolean;
+//   retryOnFail?: boolean;
+//   maxTries?: number;
+//   waitBetweenTries?: number;
+//   continueOnFail?: boolean;
+//   onError?: string;
+//   credentials?: Record<string, { id: string; name: string; }>;
+// }
+
+export interface N8NNodeInput {
   id?: string;
   name: string;
   type: string;
@@ -25,6 +46,11 @@ export interface N8NNode {
   continueOnFail?: boolean;
   onError?: string;
   credentials?: Record<string, { id: string; name: string; }>;
+}
+
+export interface N8NNodeResponse extends N8NNodeInput {
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface WorkflowSettings {
@@ -46,9 +72,9 @@ export interface WorkflowConnection {
 }
 
 export interface WorkflowSpec {
-  name: string;
-  nodes: N8NNode[];
-  connections: Record<string, Array<{ node: string; type: string; index: number }>>;
-  settings: WorkflowSettings;
+  name?: string;
+  nodes?: N8NNodeInput[];
+  connections?: Record<string, Array<{ node: string; type: string; index: number }>>;
+  settings?: WorkflowSettings;
   staticData?: Record<string, any> | string | null;
 }
