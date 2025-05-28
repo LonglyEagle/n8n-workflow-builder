@@ -1,32 +1,3 @@
-// export interface WorkflowNode {
-//   id?: string;
-//   type: string;
-//   name: string;
-//   parameters?: Record<string, any>;
-//   position?: { x: number; y: number };
-// }
-
-// export interface N8NNode { // Removing this old N8NNode interface
-//   id?: string;
-//   name: string;
-//   type: string;
-//   typeVersion: number;
-//   parameters: Record<string, any>;
-//   position?: number[];
-//   webhookId?: string;
-//   disabled?: boolean;
-//   notesInFlow?: boolean;
-//   notes?: string;
-//   executeOnce?: boolean;
-//   alwaysOutputData?: boolean;
-//   retryOnFail?: boolean;
-//   maxTries?: number;
-//   waitBetweenTries?: number;
-//   continueOnFail?: boolean;
-//   onError?: string;
-//   credentials?: Record<string, { id: string; name: string; }>;
-// }
-
 export interface N8NNodeInput {
   id?: string;
   name: string;

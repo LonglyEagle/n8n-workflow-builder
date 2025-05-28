@@ -23,26 +23,39 @@ export class WorkflowBuilder {
     let transformedConnections: WorkflowSpec['connections'] = undefined;
 
     if (this.connections.length > 0) {
-      transformedConnections = {};
+      transformedConnections = {}; // Initialize as an empty object
       for (const conn of this.connections) {
-        if (!transformedConnections[conn.source]) {
-          transformedConnections[conn.source] = [];
+        let sourceOutputName = 'main'; // Default for undefined or 0
+        if (conn.sourceOutput === 0) {
+          sourceOutputName = 'main';
+        } else if (typeof conn.sourceOutput === 'number' && conn.sourceOutput > 0) {
+          // Mapping convention: index 1 -> "output_1", index 2 -> "output_2", etc.
+          // Adjust if n8n uses different named outputs for indices > 0.
+          sourceOutputName = `output_${conn.sourceOutput}`;
         }
-        // Ensure targetInput is a number, defaulting to 0 if undefined
+        // If conn.sourceOutput is undefined, it defaults to 'main' as per initialization.
+
+        if (!transformedConnections[sourceOutputName]) {
+          transformedConnections[sourceOutputName] = [];
+        }
+
         const targetInputIndex = conn.targetInput ?? 0;
-        transformedConnections[conn.source].push({
-          node: conn.target, // Target Node ID
-          type: 'main',      // Assuming target input name is 'main' by convention
-          index: targetInputIndex, 
+        transformedConnections[sourceOutputName].push({
+          node: conn.target,        // Target Node ID
+          type: 'main',             // Assuming target input slot name is 'main'
+          index: targetInputIndex,  // Target input slot index
         });
       }
     }
 
     return {
+      // name, settings, staticData are optional in WorkflowSpec.
+      // Explicitly setting them as undefined if not managed by this basic builder.
+      name: undefined, 
       nodes: this.nodes,
       connections: transformedConnections,
-      // name, settings, staticData are optional in WorkflowSpec,
-      // so they can be omitted here if the builder doesn't set them.
+      settings: undefined, 
+      staticData: undefined,
     };
   }
 }

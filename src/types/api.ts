@@ -11,7 +11,12 @@ export interface N8NWorkflowResponse {
   connections?: Record<string, Array<{ node: string; type: string; index: number }>>;
   settings?: WorkflowSettings;
   staticData?: Record<string, any> | string | null;
-  tags?: { id: string; name: string; createdAt: string; updatedAt: string; }[];
+  tags?: Array<{
+    id: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+  }>;
 }
 
 /**
